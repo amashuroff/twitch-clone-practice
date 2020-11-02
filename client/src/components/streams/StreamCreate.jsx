@@ -1,5 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { createStream } from "../../actions";
 
 class StreamCreate extends React.Component {
   renderError({ error, touched }) {
@@ -12,22 +14,25 @@ class StreamCreate extends React.Component {
     }
   }
 
-  renderInput = ({ input, label, meta }) => {
+  renderInput = (props) => {
     // take all the formProps (key/val) pairs
     // add them to the input element
-    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
+
+    const className = `field ${
+      props.meta.error && props.meta.touched ? "error" : ""
+    }`;
     return (
       <div className={className}>
-        <label>{label}</label>
-        <input {...input} autoComplete="off" />
-        {this.renderError(meta)}
+        <label>{props.label}</label>
+        <input {...props.input} autoComplete="off" />
+        {this.renderError(props.meta)}
       </div>
     );
   };
 
-  onSubmit(formValues) {
-    console.log(formValues);
-  }
+  onSubmit = (formValues) => {
+    this.props.createStream(formValues);
+  };
 
   render() {
     return (
@@ -58,8 +63,10 @@ const validate = (formValues) => {
   return errors;
 };
 
-// redux Form takes in a singe object
-export default reduxForm({
+const formWrapped = reduxForm({
   form: "streamCreate",
   validate,
 })(StreamCreate);
+
+// redux Form takes in a singe object
+export default connect(null, { createStream })(formWrapped);
