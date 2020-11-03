@@ -1,6 +1,8 @@
 import React from "react";
+
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
+
 import { createStream } from "../../actions";
 
 class StreamCreate extends React.Component {
@@ -15,12 +17,13 @@ class StreamCreate extends React.Component {
   }
 
   renderInput = (props) => {
-    // take all the formProps (key/val) pairs
-    // add them to the input element
-
     const className = `field ${
-      props.meta.error && props.meta.touched ? "error" : ""
+      props.meta.error && props.meta.touched ? "error" : "" // error class will allow to display error
     }`;
+
+    // {..props.input}
+    // take all the parent props (key/val) pairs
+    // add them to the input element
     return (
       <div className={className}>
         <label>{props.label}</label>

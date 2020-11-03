@@ -28,7 +28,8 @@ class GoogleAuth extends React.Component {
     }
   };
 
-  onSignInClick = () => {
+  onSignInClick = (props) => {
+    console.log(props);
     this.auth.signIn();
   };
 
