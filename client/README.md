@@ -7,3 +7,4 @@ What i've learned:
 5. Some common lodash functions
 6. Re-usability of components
 7. Redux devtools
+8. How to set up JSON api, RTMP with FLV.js
